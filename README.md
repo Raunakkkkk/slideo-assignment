@@ -2,6 +2,10 @@
 
 A modern, responsive document management dashboard built with Next.js 13+, featuring AI-powered document generation, real-time search, filtering, and a beautiful dark/light theme toggle.
 
+## 🌐 Live Demo
+
+**Deployed on Vercel**: [https://slideo-assignment.vercel.app/](https://slideo-assignment.vercel.app/)
+
 ## Features
 
 ### ✅ **Core Functionality**
