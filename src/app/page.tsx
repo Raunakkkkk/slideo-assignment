@@ -27,6 +27,7 @@ export default function Dashboard() {
   const [previewDocument, setPreviewDocument] = useState<Document | null>(null);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Load user preferences
   useEffect(() => {
@@ -71,12 +72,34 @@ export default function Dashboard() {
 
   // Handle sidebar toggle
   const handleToggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
+    // On mobile, open drawer; on desktop, toggle collapse
+    if (window.innerWidth < 1024) {
+      setMobileSidebarOpen(true);
+    } else {
+      setSidebarCollapsed(!sidebarCollapsed);
+    }
+  };
+
+  // Handle window resize to update sidebar behavior
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Handle mobile sidebar close with better UX
+  const handleMobileSidebarClose = () => {
+    setMobileSidebarOpen(false);
   };
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen h-screen sm:h-auto overflow-x-hidden"
       style={{
         backgroundColor: theme.mode === "light" ? "#f8fafc" : "#000000",
       }}
@@ -89,18 +112,41 @@ export default function Dashboard() {
         onToggleSidebar={handleToggleSidebar}
       />
 
-      <div className="flex h-[calc(100vh-80px)]">
-        {/* Sidebar */}
-        <FilterSidebar
-          filters={filters}
-          onFiltersChange={setFilters}
-          isCollapsed={sidebarCollapsed}
-          onToggleCollapse={handleToggleSidebar}
-        />
-
+      <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
+        {/* Desktop Sidebar */}
+        <div
+          className={`${
+            sidebarCollapsed ? "lg:w-16" : "lg:w-64"
+          } hidden lg:block h-full transition-all duration-300`}
+        >
+          <FilterSidebar
+            filters={filters}
+            onFiltersChange={setFilters}
+            isCollapsed={sidebarCollapsed}
+            onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+          />
+        </div>
+        {/* Mobile Sidebar Drawer */}
+        {mobileSidebarOpen && (
+          <div className="fixed inset-0 z-50 flex lg:hidden">
+            <div className="w-80 max-w-[85vw] h-full bg-white dark:bg-black shadow-xl transform transition-transform duration-300 ease-in-out">
+              <FilterSidebar
+                filters={filters}
+                onFiltersChange={setFilters}
+                isCollapsed={false}
+                onToggleCollapse={handleMobileSidebarClose}
+                onClose={handleMobileSidebarClose}
+              />
+            </div>
+            <div
+              className="flex-1 bg-black/50 backdrop-blur-sm"
+              onClick={handleMobileSidebarClose}
+            />
+          </div>
+        )}
         {/* Main Content */}
         <main
-          className="flex-1 overflow-auto transition-colors duration-200"
+          className={`flex-1 overflow-auto transition-all duration-300 transition-colors duration-200`}
           style={{
             backgroundColor: theme.mode === "light" ? "#f8fafc" : "#000000",
           }}

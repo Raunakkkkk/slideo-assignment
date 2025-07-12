@@ -1,5 +1,5 @@
 import React from "react";
-import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { Filter, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Select } from "./ui/Select";
 import { Button } from "./ui/Button";
 import { FilterOptions } from "@/types";
@@ -10,6 +10,7 @@ interface FilterSidebarProps {
   onFiltersChange: (filters: FilterOptions) => void;
   isCollapsed: boolean;
   onToggleCollapse: () => void;
+  onClose?: () => void;
 }
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
@@ -17,6 +18,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   onFiltersChange,
   isCollapsed,
   onToggleCollapse,
+  onClose,
 }) => {
   const { theme } = useTheme();
   const handleTypeChange = (type: string) => {
@@ -51,7 +53,9 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   const clearFilters = () => {
     onFiltersChange({
-      searchQuery: filters.searchQuery,
+      type: undefined,
+      category: undefined,
+      dateRange: { start: "", end: "" },
     });
   };
 
@@ -63,9 +67,13 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   return (
     <div
-      className={`border-r transition-all duration-300 flex-shrink-0 ${
-        isCollapsed ? "w-16" : "w-64"
-      }`}
+      className={`border-r transition-all duration-300 flex-shrink-0 h-full overflow-y-auto relative bg-white dark:bg-black
+        ${
+          isCollapsed
+            ? "w-16 max-w-[4rem]"
+            : "w-full max-w-xs lg:max-w-none lg:w-64"
+        }
+      `}
       style={{
         backgroundColor: theme.mode === "light" ? "#ffffff" : "#000000",
         borderColor: theme.mode === "light" ? "#e2e8f0" : "#1e293b",
@@ -75,7 +83,18 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             : "2px 0 4px -2px rgba(255, 255, 255, 0.15)",
       }}
     >
-      <div className="p-4">
+      {onClose && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 block lg:hidden"
+          style={{ color: theme.mode === "light" ? "#0f172a" : "#ffffff" }}
+        >
+          <X className="h-5 w-5" />
+        </Button>
+      )}
+      <div className="p-4 pt-12 lg:pt-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             {!isCollapsed && (
@@ -101,7 +120,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             variant="ghost"
             size="icon"
             onClick={onToggleCollapse}
-            className="h-8 w-8"
+            className="h-8 w-8 hidden lg:flex"
             style={{
               color: theme.mode === "light" ? "#0f172a" : "#ffffff",
             }}
@@ -328,12 +347,16 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
                 </div>
               </div>
 
-              {/* Clear Filters */}
+              {/* Clear Filters Button */}
               {hasActiveFilters && (
                 <Button
                   variant="outline"
                   onClick={clearFilters}
                   className="w-full"
+                  style={{
+                    color: theme.mode === "light" ? "#64748b" : "#94a3b8",
+                    borderColor: theme.mode === "light" ? "#cbd5e1" : "#334155",
+                  }}
                 >
                   Clear Filters
                 </Button>
@@ -341,14 +364,19 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center space-y-4 mt-4">
+          <div className="flex flex-col items-center space-y-4 group">
             <Filter
-              className="h-6 w-6"
-              style={{ color: theme.mode === "light" ? "#334155" : "#94a3b8" }}
+              className="h-5 w-5"
+              style={{
+                color: theme.mode === "light" ? "#334155" : "#94a3b8",
+              }}
             />
-            {hasActiveFilters && (
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            )}
+            <div
+              className="text-xs text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              style={{ color: theme.mode === "light" ? "#64748b" : "#94a3b8" }}
+            >
+              Filters
+            </div>
           </div>
         )}
       </div>

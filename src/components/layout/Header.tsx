@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header
-      className="border-b px-4 py-3 transition-colors duration-200"
+      className="border-b px-3 sm:px-4 py-3 transition-colors duration-200"
       style={{
         backgroundColor: theme.mode === "light" ? "#ffffff" : "#000000",
         color: theme.mode === "light" ? "#0f172a" : "#ffffff",
@@ -37,12 +37,12 @@ export const Header: React.FC<HeaderProps> = ({
       }}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={onToggleSidebar}
-            className="lg:flex"
+            className="flex lg:hidden"
             style={{
               color: theme.mode === "light" ? "#0f172a" : "#ffffff",
             }}
@@ -51,11 +51,11 @@ export const Header: React.FC<HeaderProps> = ({
           </Button>
 
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">D</span>
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xs sm:text-sm">D</span>
             </div>
             <h1
-              className="text-xl font-bold"
+              className="text-lg sm:text-xl font-bold truncate"
               style={{ color: theme.mode === "light" ? "#0f172a" : "#ffffff" }}
             >
               Document Hub
@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <div className="hidden md:block w-80">
             <SearchBar
               value={searchQuery}
@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
               variant="ghost"
               size="icon"
               onClick={switchTheme}
-              className="h-9 w-9"
+              className="h-8 w-8 sm:h-9 sm:w-9"
               title={`Switch to ${
                 theme.mode === "light" ? "dark" : "light"
               } mode`}
@@ -86,29 +86,18 @@ export const Header: React.FC<HeaderProps> = ({
               }}
             >
               {theme.mode === "light" ? (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-4 w-4 sm:h-5 sm:w-5" />
               ) : (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-4 w-4 sm:h-5 sm:w-5" />
               )}
             </Button>
 
             <Button
               onClick={onCreateDocument}
-              className="hidden md:flex items-center space-x-2"
+              className="flex items-center space-x-2"
             >
               <Plus className="h-4 w-4" />
               <span>Create Document</span>
-            </Button>
-
-            <Button
-              onClick={onCreateDocument}
-              size="icon"
-              className="md:hidden"
-              style={{
-                color: theme.mode === "light" ? "#0f172a" : "#ffffff",
-              }}
-            >
-              <Plus className="h-4 w-4" />
             </Button>
           </div>
         </div>

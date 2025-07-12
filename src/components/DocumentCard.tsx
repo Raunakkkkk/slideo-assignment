@@ -22,7 +22,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
 
   return (
     <div
-      className="rounded-lg transition-all duration-200 overflow-hidden"
+      className="rounded-lg transition-all duration-200 overflow-hidden hover:scale-[1.02] active:scale-[0.98]"
       style={{
         backgroundColor: theme.mode === "light" ? "#ffffff" : "#000000",
         border: `1px solid ${theme.mode === "light" ? "#e2e8f0" : "#1e293b"}`,
@@ -32,41 +32,47 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             : "0 1px 3px 0 rgba(255, 255, 255, 0.15), 0 1px 2px 0 rgba(255, 255, 255, 0.1)",
       }}
       onMouseEnter={(e) => {
+        if (window.innerWidth > 768) {
         e.currentTarget.style.boxShadow =
           theme.mode === "light"
             ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
             : "0 4px 6px -1px rgba(255, 255, 255, 0.2), 0 2px 4px -1px rgba(255, 255, 255, 0.15)";
+        }
       }}
       onMouseLeave={(e) => {
+        if (window.innerWidth > 768) {
         e.currentTarget.style.boxShadow =
           theme.mode === "light"
             ? "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
             : "0 1px 3px 0 rgba(255, 255, 255, 0.15), 0 1px 2px 0 rgba(255, 255, 255, 0.1)";
+        }
       }}
     >
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-2xl">{getDocumentIcon(document.type)}</span>
-            <div className="flex flex-col">
+          <div className="flex items-center space-x-2 flex-1 min-w-0">
+            <span className="text-xl sm:text-2xl flex-shrink-0">
+              {getDocumentIcon(document.type)}
+            </span>
+            <div className="flex flex-col min-w-0 flex-1">
               <h3
-                className="font-semibold text-sm line-clamp-2"
+                className="font-semibold text-sm line-clamp-2 leading-tight"
                 style={{
                   color: theme.mode === "light" ? "#0f172a" : "#ffffff",
                 }}
               >
                 {document.title}
               </h3>
-              <div className="flex items-center space-x-2 mt-1">
+              <div className="flex items-center space-x-1 sm:space-x-2 mt-1 flex-wrap gap-1">
                 <span
-                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(
+                  className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${getTypeColor(
                     document.type
                   )}`}
                 >
                   {document.type}
                 </span>
                 <span
-                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(
+                  className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${getCategoryColor(
                     document.category
                   )}`}
                 >
@@ -77,7 +83,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           </div>
           {document.aiGenerated && (
             <span
-              className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
+              className="inline-flex items-center px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium flex-shrink-0"
               style={{
                 backgroundColor: theme.mode === "light" ? "#f3e8ff" : "#581c87",
                 color: theme.mode === "light" ? "#7c3aed" : "#c084fc",
@@ -111,14 +117,14 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
         {document.tags.length > 0 && (
           <div className="flex items-center space-x-1 mb-3">
             <Tag
-              className="h-3 w-3"
+              className="h-3 w-3 flex-shrink-0"
               style={{ color: theme.mode === "light" ? "#9ca3af" : "#6b7280" }}
             />
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1 min-w-0">
               {document.tags.slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
+                  className="inline-flex items-center px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium"
                   style={{
                     backgroundColor:
                       theme.mode === "light" ? "#f3f4f6" : "#374151",

@@ -1,14 +1,6 @@
-const withNetlify = require('@netlify/next');
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true, // Required for Next.js 13+ App Router
-  },
-  // Add other Next.js config here if needed
-  trailingSlash: true,
-  images: {
-    unoptimized: true,
-  },
+  // Add any custom Next.js config here if needed
 };
 
-module.exports = withNetlify(nextConfig);
+export default nextConfig;

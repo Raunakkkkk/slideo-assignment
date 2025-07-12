@@ -56,7 +56,7 @@ export const CreateDocumentModal: React.FC<CreateDocumentModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Create New Document"
-      className="max-w-lg"
+      className="max-w-lg w-full mx-2 sm:mx-4"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -72,7 +72,7 @@ export const CreateDocumentModal: React.FC<CreateDocumentModalProps> = ({
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Document Type
@@ -121,19 +121,20 @@ export const CreateDocumentModal: React.FC<CreateDocumentModalProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center justify-end space-x-3 pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-end space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
           <Button
             type="button"
             variant="outline"
             onClick={onClose}
             disabled={loading}
+            className="w-full sm:w-auto"
           >
             Cancel
           </Button>
           <Button
             type="submit"
             disabled={!isFormValid || loading}
-            className="min-w-[100px]"
+            className="min-w-[100px] w-full sm:w-auto"
           >
             {loading ? (
               <>

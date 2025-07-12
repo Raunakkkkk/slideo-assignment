@@ -41,14 +41,14 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
       <div
         className={cn(
-          "relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg shadow-xl",
+          "relative w-full max-w-md max-h-[95vh] sm:max-h-[90vh] overflow-y-auto rounded-lg shadow-xl",
           className
         )}
         style={{
@@ -62,13 +62,13 @@ export const Modal: React.FC<ModalProps> = ({
       >
         {title && (
           <div
-            className="flex items-center justify-between p-6 border-b"
+            className="flex items-center justify-between p-4 sm:p-6 border-b"
             style={{
               borderColor: theme.mode === "light" ? "#e5e7eb" : "#1e293b",
             }}
           >
             <h2
-              className="text-lg font-semibold"
+              className="text-base sm:text-lg font-semibold"
               style={{ color: theme.mode === "light" ? "#111827" : "#ffffff" }}
             >
               {title}
@@ -86,7 +86,7 @@ export const Modal: React.FC<ModalProps> = ({
             </Button>
           </div>
         )}
-        <div className="p-6">{children}</div>
+        <div className="p-4 sm:p-6">{children}</div>
       </div>
     </div>
   );
