@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Search, X } from "lucide-react";
 import { Input } from "./ui/Input";
 import { useTheme } from "./ThemeProvider";
@@ -16,7 +16,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search documents...",
   className,
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const { theme } = useTheme();
 
   const handleClear = () => {
@@ -26,17 +25,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className={`relative ${className}`}>
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <Search 
-          className="h-5 w-5" 
-          style={{ color: theme.mode === 'light' ? '#64748b' : '#94a3b8' }}
+        <Search
+          className="h-5 w-5"
+          style={{ color: theme.mode === "light" ? "#64748b" : "#94a3b8" }}
         />
       </div>
       <Input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
         className="pl-10 pr-10"
       />
@@ -44,17 +41,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <button
           onClick={handleClear}
           className="absolute inset-y-0 right-0 pr-3 flex items-center transition-colors"
-          style={{ 
-            color: theme.mode === 'light' ? '#64748b' : '#94a3b8',
-            ':hover': {
-              color: theme.mode === 'light' ? '#334155' : '#cbd5e1'
-            }
+          style={{
+            color: theme.mode === "light" ? "#64748b" : "#94a3b8",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = theme.mode === 'light' ? '#334155' : '#cbd5e1';
+            e.currentTarget.style.color =
+              theme.mode === "light" ? "#334155" : "#cbd5e1";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = theme.mode === 'light' ? '#64748b' : '#94a3b8';
+            e.currentTarget.style.color =
+              theme.mode === "light" ? "#64748b" : "#94a3b8";
           }}
         >
           <X className="h-5 w-5" />

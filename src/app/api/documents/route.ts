@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Document, CreateDocumentRequest } from "@/types";
 
 // Mock data
-let documents: Document[] = [
+const documents: Document[] = [
   {
     id: "1",
     title: "Marketing Strategy Q1 2025",
@@ -77,7 +77,7 @@ export async function GET() {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     return NextResponse.json(documents);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch documents" },
       { status: 500 }
@@ -138,7 +138,7 @@ export async function POST(request: NextRequest) {
     documents.unshift(newDocument);
 
     return NextResponse.json(newDocument, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create document" },
       { status: 500 }

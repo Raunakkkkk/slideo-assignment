@@ -1,8 +1,8 @@
-const withNetlify = require('@netlify/next');
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Standard Next.js configuration for Vercel
   experimental: {
-    appDir: true, // Required for Next.js 13+ App Router
+    appDir: true,
   },
   // Add other Next.js config here if needed
   trailingSlash: true,
@@ -11,4 +11,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withNetlify(nextConfig);
+module.exports = nextConfig;

@@ -22,7 +22,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
   onClose,
 }) => {
   const { theme } = useTheme();
-  
+
   if (!document) return null;
 
   return (
@@ -38,9 +38,11 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
           <div className="flex items-center space-x-3">
             <span className="text-3xl">{getDocumentIcon(document.type)}</span>
             <div>
-              <h1 
+              <h1
                 className="text-xl font-semibold"
-                style={{ color: theme.mode === 'light' ? '#111827' : '#ffffff' }}
+                style={{
+                  color: theme.mode === "light" ? "#111827" : "#ffffff",
+                }}
               >
                 {document.title}
               </h1>
@@ -60,16 +62,17 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
                   {document.category}
                 </span>
                 {document.aiGenerated && (
-                  <span 
+                  <span
                     className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                     style={{
-                      backgroundColor: theme.mode === 'light' ? '#f3e8ff' : '#581c87',
-                      color: theme.mode === 'light' ? '#7c3aed' : '#c084fc'
+                      backgroundColor:
+                        theme.mode === "light" ? "#f3e8ff" : "#581c87",
+                      color: theme.mode === "light" ? "#7c3aed" : "#c084fc",
                     }}
                   >
-                    <Sparkles 
-                      className="h-3 w-3 mr-1" 
-                      style={{ color: 'inherit' }}
+                    <Sparkles
+                      className="h-3 w-3 mr-1"
+                      style={{ color: "inherit" }}
                     />
                     AI Generated
                   </span>
@@ -80,18 +83,20 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
         </div>
 
         {/* Document Metadata */}
-        <div 
+        <div
           className="flex items-center justify-between text-sm pb-4 border-b"
           style={{
-            color: theme.mode === 'light' ? '#6b7280' : '#9ca3af',
-            borderColor: theme.mode === 'light' ? '#e5e7eb' : '#1e293b'
+            color: theme.mode === "light" ? "#6b7280" : "#9ca3af",
+            borderColor: theme.mode === "light" ? "#e5e7eb" : "#1e293b",
           }}
         >
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
-              <Calendar 
-                className="h-4 w-4" 
-                style={{ color: theme.mode === 'light' ? '#6b7280' : '#9ca3af' }}
+              <Calendar
+                className="h-4 w-4"
+                style={{
+                  color: theme.mode === "light" ? "#6b7280" : "#9ca3af",
+                }}
               />
               <span>Created: {formatDateTime(document.createdAt)}</span>
             </div>
@@ -101,9 +106,9 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
         {/* Document Tags */}
         {document.tags.length > 0 && (
           <div className="flex items-center space-x-2">
-            <Tag 
-              className="h-4 w-4" 
-              style={{ color: theme.mode === 'light' ? '#9ca3af' : '#6b7280' }}
+            <Tag
+              className="h-4 w-4"
+              style={{ color: theme.mode === "light" ? "#9ca3af" : "#6b7280" }}
             />
             <div className="flex flex-wrap gap-2">
               {document.tags.map((tag, index) => (
@@ -111,8 +116,9 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
                   key={index}
                   className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                   style={{
-                    backgroundColor: theme.mode === 'light' ? '#f3f4f6' : '#374151',
-                    color: theme.mode === 'light' ? '#374151' : '#d1d5db'
+                    backgroundColor:
+                      theme.mode === "light" ? "#f3f4f6" : "#374151",
+                    color: theme.mode === "light" ? "#374151" : "#d1d5db",
                   }}
                 >
                   {tag}
@@ -123,22 +129,22 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
         )}
 
         {/* Document Content */}
-        <div 
+        <div
           className="rounded-lg p-6"
           style={{
-            backgroundColor: theme.mode === 'light' ? '#f9fafb' : '#0f172a'
+            backgroundColor: theme.mode === "light" ? "#f9fafb" : "#0f172a",
           }}
         >
-          <h3 
+          <h3
             className="text-lg font-medium mb-4"
-            style={{ color: theme.mode === 'light' ? '#111827' : '#ffffff' }}
+            style={{ color: theme.mode === "light" ? "#111827" : "#ffffff" }}
           >
             Content
           </h3>
           <div className="prose prose-sm max-w-none">
-            <div 
+            <div
               className="whitespace-pre-wrap leading-relaxed"
-              style={{ color: theme.mode === 'light' ? '#374151' : '#d1d5db' }}
+              style={{ color: theme.mode === "light" ? "#374151" : "#d1d5db" }}
             >
               {document.content}
             </div>

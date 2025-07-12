@@ -22,14 +22,20 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const handleTypeChange = (type: string) => {
     onFiltersChange({
       ...filters,
-      type: type === "all" ? undefined : (type as any),
+      type:
+        type === "all"
+          ? undefined
+          : (type as "document" | "slide" | "spreadsheet"),
     });
   };
 
   const handleCategoryChange = (category: string) => {
     onFiltersChange({
       ...filters,
-      category: category === "all" ? undefined : (category as any),
+      category:
+        category === "all"
+          ? undefined
+          : (category as "business" | "personal" | "academic"),
     });
   };
 

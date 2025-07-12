@@ -83,7 +83,6 @@ export const getUserPreferences = (): UserPreferences => {
   return getFromLocalStorage<UserPreferences>("userPreferences", {
     theme: { mode: "light" },
     sidebarCollapsed: false,
-    gridView: true,
   });
 };
 
@@ -105,7 +104,7 @@ export const filterDocuments = (
   searchQuery: string,
   type?: string,
   category?: string,
-  dateRange?: { start: string; end: string }
+  dateRange?: { start?: string; end?: string }
 ): Document[] => {
   return documents.filter((doc) => {
     const matchesSearch =

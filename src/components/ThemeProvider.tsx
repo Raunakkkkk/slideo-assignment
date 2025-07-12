@@ -48,7 +48,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [theme, mounted]);
 
   const switchTheme = () => {
-    const newTheme = {
+    const newTheme: Theme = {
       mode: theme.mode === "light" ? "dark" : "light",
     };
     setTheme(newTheme);

@@ -179,4 +179,3 @@ document-dashboard/
 - **Inline Styles**: For theme-dependent properties
 - **Component Variants**: Type-safe styling with CVA
 - **Responsive Design**: Mobile-first approach
-

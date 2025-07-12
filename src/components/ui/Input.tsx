@@ -8,7 +8,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     const { theme } = useTheme();
-    
+
     return (
       <input
         type={type}
@@ -17,15 +17,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         style={{
-          backgroundColor: theme.mode === 'light' ? '#ffffff' : '#000000',
-          color: theme.mode === 'light' ? '#0f172a' : '#ffffff',
-          border: `1px solid ${theme.mode === 'light' ? '#cbd5e1' : '#334155'}`,
-          boxShadow: theme.mode === 'light' 
-            ? '0 1px 2px 0 rgba(0, 0, 0, 0.05)' 
-            : '0 1px 2px 0 rgba(255, 255, 255, 0.1)',
-          '::placeholder': {
-            color: theme.mode === 'light' ? '#64748b' : '#94a3b8'
-          }
+          backgroundColor: theme.mode === "light" ? "#ffffff" : "#000000",
+          color: theme.mode === "light" ? "#0f172a" : "#ffffff",
+          border: `1px solid ${theme.mode === "light" ? "#cbd5e1" : "#334155"}`,
+          boxShadow:
+            theme.mode === "light"
+              ? "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+              : "0 1px 2px 0 rgba(255, 255, 255, 0.1)",
         }}
         ref={ref}
         {...props}
